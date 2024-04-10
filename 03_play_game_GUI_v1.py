@@ -1,5 +1,5 @@
 from tkinter import *
-from functools import partial # to prevent unwanted windows
+from functools import partial  # to prevent unwanted windows
 import csv
 import random
 
@@ -21,7 +21,7 @@ class Play:
 
     def __init__(self, how_many):
 
-        self.play_box = TopLevel()
+        self.play_box = Toplevel()
 
         # If users press cross at top, closes help and
         # 'releases' help button
@@ -57,7 +57,7 @@ class Play:
                                     )
         self.choose_heading.grid(row=0)
 
-        instructions = "Choose one of the colours below. When you choose" \
+        instructions = "Choose one of the colours below. When you choose " \
                        "a colour, the computer's choice and the results" \
                        "the round will be recycled."
         self.instructions_label = Label(self.quest_frame, text=instructions,
@@ -66,7 +66,7 @@ class Play:
 
         # get colours for buttons for first round ...
         button_colours_list = self.get_round_colours()
-        print(button_colours_list) # for testing purposes only remove
+        print(button_colours_list)  # for testing purposes only remove
 
         # create colour buttons (in choice_frame)!
         self.choice_frame = Frame(self.quest_frame)
@@ -78,7 +78,7 @@ class Play:
                                         bg=button_colours_list[item][0],
                                         text="{}".format(button_colours_list[item][0]),
                                         width=15,
-                                        command=lambda i=item: self.to_commpare(button_colours_list[i][1])
+                                        command=lambda i=item: self.to_compare(button_colours_list[i][1])
                                         )
             self.choice_button.grid(row=item // 3,
                                     column=item % 3,
@@ -122,7 +122,7 @@ class Play:
             ["#808080", "Start Over", "start over"]
         ]
 
-        for item in range (0, 3):
+        for item in range(0, 3):
             self.make_control_button = Button(self.control_frame,
                                               fg="#FFFFFF",
                                               bg=control_buttons[item][0],
@@ -139,7 +139,7 @@ class Play:
         file.close()
 
         # removes first entry in list (ie: the header row).
-        var.all_colours.pop(0)
+        var_all_colours.pop(0)
         return var_all_colours
 
     # randomly choose six colours for buttons
@@ -148,9 +148,9 @@ class Play:
         colour_scores = []
 
         # get six unique colours
-        while len(round_colour_list) < 6
+        while len(round_colour_list) < 6:
             # choose item
-            chosen_colour = random_choice(self.all_colours)
+            chosen_colour = random.choice(self.all_colours)
             index_chosen = self.all_colours.index(chosen_colour)
 
             # check score is not already in list
@@ -188,3 +188,10 @@ class Play:
     def close_play(self):
         root.destroy()
 
+
+# main routine
+if __name__ == "__main__":
+    root = Tk()
+    root.title("Color Game")
+    ChooseRounds()
+    root.mainloop()
